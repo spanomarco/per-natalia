@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Natalia ❤️</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #card {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            width: 90%;
+            max-width: 420px;
+            border: 2px solid #ff4d6d;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .button-container {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 80px;
+        }
+        button {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #800f2f; color: white; position: relative; transition: all 0.1s ease; }
+        .gif-container { 
+            width: 100%; 
+            border-radius: 15px; 
+            margin-top: 15px; 
+            overflow: hidden;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            min-height: 150px;
+        }
+        .gif-container img { width: 100%; display: block; object-fit: contain; }
+        #memeSection { display: none; margin-top: 15px; }
+        #finalMessage { display: none; }
+        .inter-colors { color: #0068A8; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="card">
+    <div id="quiz">
+        <h1>Hi Natalia! ❤️</h1>
+        <p>Marco has a special question...</p>
+        <p><strong>Will you be my Valentine?</strong></p>
+        <div class="button-container">
+            <button id="yesBtn" onclick="showLove()">YES!</button>
+            <button id="noBtn" onmouseover="dodge()" onclick="dodge()">No</button>
+        </div>
+        <div id="memeSection">
+            <p id="warningText" style="color:red; font-weight:bold; margin-bottom: 10px;"></p>
+            <div id="gifBox" class="gif-container"></div>
+        </div>
+    </div>
+
+    <div id="finalMessage">
+        <p style="font-size: 1.1rem; line-height: 1.5;">
+            <b>Natalia, you are the beat of my heart and the light in my every day.</b><br>
+            <b>I promise to love you more with every passing second.</b><br><br>
+            I am the luckiest guy to have you by my side.
+        </p>
+        <div class="gif-container">
+            <img id="finalGif" src="" alt="Love">
+        </div>
+        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+        <h2 class="inter-colors">P.S. Grazie per lasciarmi guardare l'Inter! 🖤💙</h2>
+    </div>
+</div>
+
+<script>
+    let moveCount = 0;
+    const noBtn = document.getElementById('noBtn');
+
+    const memeData = {
+        1: { text: "Are you sure about that?", gif: "dog.gif" },
+        2: { text: "Wait... what?!", gif: "checco.gif" },
+        3: { text: "Don't make Pikachu cry...", gif: "pikachu.gif" },
+        4: { text: "I see you...", gif: "ned.gif" },
+        5: { text: "YOU JUST DESTROYED YOUR LIFE!", gif: "alite.gif" }
+    };
+
+    function dodge() {
+        moveCount++;
+        noBtn.style.position = 'fixed';
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+
+        if (moveCount % 3 === 0) {
+            const step = Math.min(Math.floor(moveCount / 3), 5);
+            const current = memeData[step];
+            document.getElementById('memeSection').style.display = 'block';
+            document.getElementById('warningText').innerText = current.text;
+            document.getElementById('gifBox').innerHTML = `<img src="${current.gif}">`;
+        }
+    }
+
+    function showLove() {
+        document.getElementById('quiz').style.display = 'none';
+        noBtn.style.display = 'none';
+        document.getElementById('finalMessage').style.display = 'block';
+        document.getElementById('finalGif').src = "goodchoice.gif";
+    }
+</script>
+</body>
+</html>
